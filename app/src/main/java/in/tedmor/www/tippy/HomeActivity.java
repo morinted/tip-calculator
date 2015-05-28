@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
+
 
 public class HomeActivity extends Activity {
 
@@ -46,11 +50,14 @@ public class HomeActivity extends Activity {
 
     public void generateTip(View view) {
         // just the tippy
+        NumberFormat currFrmt = NumberFormat.getCurrencyInstance(Locale.getDefault());
         TextView tippyText = (TextView) findViewById(R.id.tippyValue);
         EditText editBill = (EditText) findViewById(R.id.editBill);
         EditText editPercent = (EditText) findViewById(R.id.editPercent);
-        tippyText.setText(Double.toString(Double.parseDouble(editBill.getText().toString()) *
-                Double.parseDouble(editPercent.getText().toString()) / 100));
-        System.out.println("tippy");
+        Double tipAmt = Double.parseDouble(editBill.getText().toString()) *
+                Double.parseDouble(editPercent.getText().toString()) / 100;
+        String tip = currFrmt.format(tipAmt);
+
+        tippyText.setText(tip);
     }
 }
