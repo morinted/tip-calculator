@@ -11,4 +11,26 @@
     <string name="sign_dollar">$</string>
     <string name="change_currency">Change Currency</string>
     <string name="generate">\'Tippy\' Me!</string>
+    <string name="SIGN_KEY">SIGN</string>
+    <string name="PERS_KEY">PERS</string>
+    <string name="num_people">People Paying</string>
+    <string name="tipcardcost">Bill:</string>
+    <string name="tipcardtip">Tip:</string>
+    <string name="tipcardtotal">Total:</string>
+    <string name="tipcardnumpeople">With $d people</string>
+    <string name="tipcardtipperperson">Tip per person:</string>
+    <string name="tipcardtotalperperson">Total per person:</string>
+    <string name="total_amt">Total:</string>
+    <string-array name="number_of_people">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>

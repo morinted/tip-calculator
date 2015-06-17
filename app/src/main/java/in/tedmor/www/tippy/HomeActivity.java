@@ -1,24 +1,51 @@
 package in.tedmor.www.tippy;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.Locale;
 
 
 public class HomeActivity extends Activity {
+    String currencySign;
+    int defaultPercentage;
 
+    public void loadSettings() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String defaultSign = getResources().getString(R.string.sign_dollar);
+        currencySign = sharedPref.getString(getString(R.string.SIGN_KEY), defaultSign);
+        defaultPercentage = sharedPref.getInt(getString(R.string.PERS_KEY), 15);
+        TextView currencySymbol = (TextView) findViewById(R.id.textDollarHint);
+        currencySymbol.setText(currencySign);
+        EditText percentage = (EditText) findViewById(R.id.editPers);
+        if (percentage.getText().length() == 0) {
+            percentage.setText(Integer.toString(defaultPercentage), TextView.BufferType.EDITABLE);
+        }
+    }
+
+    public void populateSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.number_of_people, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        loadSettings();
+        populateSpinner();
     }
 
 
@@ -50,14 +77,18 @@ public class HomeActivity extends Activity {
 
     public void generateTip(View view) {
         // just the tippy
-        NumberFormat currFrmt = NumberFormat.getCurrencyInstance(Locale.getDefault());
-        TextView tippyText = (TextView) findViewById(R.id.tippyValue);
-        EditText editBill = (EditText) findViewById(R.id.editBill);
-        EditText editPercent = (EditText) findViewById(R.id.editPercent);
-        Double tipAmt = Double.parseDouble(editBill.getText().toString()) *
-                Double.parseDouble(editPercent.getText().toString()) / 100;
-        String tip = currFrmt.format(tipAmt);
 
-        tippyText.setText(tip);
+        TextView tippyText = (TextView) findViewById(R.id.tippyValue);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+
+        EditText editCost = (EditText) findViewById(R.id.editCost);
+        EditText editPercent = (EditText) findViewById(R.id.editPers);
+        Tip tip = new Tip(Double.parseDouble(editCost.getText().toString()),
+                Double.parseDouble(editPercent.getText().toString()),
+                Integer.parseInt(spinner.getSelectedItem().toString()));
+
+        String tipAmt = currencySign + tip.getTipToString();
+
+        tippyText.setText(tipAmt);
     }
 }
