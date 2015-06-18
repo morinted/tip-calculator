@@ -18,7 +18,7 @@
     <ListPreference
         android:key="SIGN"
         android:title="@string/pref_title_currency_sign"
-        android:defaultValue="0"
+        android:defaultValue="@string/sign_dollar"
         android:entries="@array/pref_currency_sign_options"
         android:entryValues="@array/pref_currency_sign_vals"
         android:negativeButtonText="@null"

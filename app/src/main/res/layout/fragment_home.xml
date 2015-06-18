@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     tools:showIn="@layout/activity_home"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="false"
+    android:id="@+id/scroll_view">
 
     <GridLayout
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -22,10 +24,11 @@
             android:id="@+id/spinner"
             android:layout_row="0"
             android:layout_column="2"
+            android:layout_columnSpan="2"
             android:spinnerMode="dropdown"
             android:focusable="true"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="50dp" />
+            android:layout_marginRight="50dp"
+            android:layout_gravity="right" />
 
         <TextView
             android:layout_width="wrap_content"

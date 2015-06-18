@@ -88,7 +88,7 @@ public class Popover extends DialogFragment implements View.OnClickListener  {
     public void onClick(View view) {
         View dialog = (View) view.getParent();
         float rating = ((RatingBar) dialog.findViewById(R.id.ratingBarInput)).getRating();
-        System.out.println("btn got clicked: " + rating);
+        System.out.println("btn got 'tippy' clicked: " + rating);
 
         HomeActivity activity = (HomeActivity) getActivity();
 

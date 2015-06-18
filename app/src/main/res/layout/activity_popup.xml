@@ -51,8 +51,8 @@
                 android:numStars="5"
                 android:stepSize="1.0"
                 android:layout_gravity="center"
-                android:progressTint="@color/tippy_purple"
-                android:progressBackgroundTint="@color/tippy_purple"
+                android:progressTint="@color/yppit_yellow"
+                android:progressBackgroundTint="@color/yppit_yellow"
                 android:clickable="true"
                 android:rating="3.0"
                 android:id="@+id/ratingBarInput" />

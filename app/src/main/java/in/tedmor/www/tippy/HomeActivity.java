@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +30,13 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
     ArrayList<TipCard> tipCards = new ArrayList<TipCard>();
 
     public void loadSettings() {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String defaultSign = getResources().getString(R.string.sign_dollar);
-        currencySign = sharedPref.getString(getString(R.string.SIGN_KEY), defaultSign);
-        defaultPercentage = sharedPref.getInt(getString(R.string.PERS_KEY), 15);
+        currencySign = PreferenceManager
+                .getDefaultSharedPreferences(this)
+                .getString("SIGN", defaultSign);
+        defaultPercentage = Integer.parseInt(PreferenceManager
+                .getDefaultSharedPreferences(this)
+                .getString("PERS", "15"));
         TextView currencySymbol = (TextView) findViewById(R.id.textDollarHint);
         currencySymbol.setText(currencySign);
         EditText percentage = (EditText) findViewById(R.id.editPers);
@@ -107,10 +111,12 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
                 throw new NumberFormatException("Percentage is zero");
             }
             editPercent.setHint(getResources().getString(R.string.percent_placeholder));
+            editPercent.setHintTextColor(getResources().getColor(android.R.color.darker_gray));
         } catch (Exception e) {
             System.err.println("Invalid percent");
             editPercent.setText(null);
-            editPercent.setHint(getResources().getString(R.string.bill_err));
+            editPercent.setHintTextColor(getResources().getColor(R.color.pitty_red));
+            editPercent.setHint(getResources().getString(R.string.percent_err));
             editPercent.requestFocus();
             returnFlag = true;
         }
@@ -120,10 +126,12 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
                 throw new NumberFormatException("Cost is zero");
             }
             editCost.setHint(getResources().getString(R.string.bill_placeholder));
+            editCost.setHintTextColor(getResources().getColor(android.R.color.darker_gray));
         } catch (Exception e) {
             System.err.println("Invalid cost");
             editCost.setText(null);
-            editCost.setHint(getResources().getString(R.string.percent_err));
+            editCost.setHintTextColor(getResources().getColor(R.color.pitty_red));
+            editCost.setHint(getResources().getString(R.string.bill_err));
             editCost.requestFocus();
             returnFlag = true;
         }
@@ -144,7 +152,8 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         TipCard tipCard = TipCard.newInstance(tip);
         tipCards.add(tipCard);
         LinearLayout ll = (LinearLayout) findViewById(R.id.tip_list);
-
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_left,
+                R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.tip_list, tipCard, "TIP");
         fragmentTransaction.commit();
         findViewById(R.id.gridLayout).requestFocus();
