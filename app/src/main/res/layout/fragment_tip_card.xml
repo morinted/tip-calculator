@@ -41,7 +41,9 @@ android:layout_marginTop="@dimen/activity_horizontal_margin">
         android:layout_columnSpan="3"
         android:rating="3"
         android:stepSize="1"
-        android:isIndicator="true" />
+        android:isIndicator="true"
+        android:progressTint="@color/yppit_yellow"
+        android:progressBackgroundTint="@color/yppit_yellow" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -121,7 +123,8 @@ android:layout_marginTop="@dimen/activity_horizontal_margin">
         android:text="$1.00"
         android:id="@+id/displayTipPerPerson"
         android:layout_row="4"
-        android:layout_column="2" />
+        android:layout_column="2"
+        android:layout_columnSpan="2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -141,7 +144,8 @@ android:layout_marginTop="@dimen/activity_horizontal_margin">
         android:text="$1.00"
         android:id="@+id/displayTotalPerPerson"
         android:layout_row="5"
-        android:layout_column="2" />
+        android:layout_column="2"
+        android:layout_columnSpan="2" />
 
     <TextView
         android:layout_width="wrap_content"

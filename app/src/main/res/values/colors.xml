@@ -2,4 +2,6 @@
 <resources>
     <color
         name="tippy_purple">#BE5BFF</color>
+    <color name="yppit_yellow">#FFDE50</color>
+    <color name="white">#FFFFFF</color>
 </resources>

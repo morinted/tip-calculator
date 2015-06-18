@@ -1,0 +1,23 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_default_tip">Default tip percentage on launch</string>
+
+    <string name="pref_title_currency_sign">Select local currency symbol</string>
+    <string-array name="pref_currency_sign_options">
+        <item>$ - Dollar</item>
+        <item>€ - Euro</item>
+        <item>£ - Pound</item>
+    </string-array>
+    <string-array name="pref_currency_sign_vals">
+        <item>$</item>
+        <item>€</item>
+        <item>£</item>
+    </string-array>
+
+</resources>

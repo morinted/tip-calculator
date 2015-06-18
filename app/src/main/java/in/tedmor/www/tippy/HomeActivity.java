@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class HomeActivity extends Activity implements TipCard.OnFragmentInteractionListener {
@@ -62,6 +65,12 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         return true;
     }
 
+    public void openSettings() {
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+        return;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -69,7 +78,8 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
-            case R.id.currencyChange:
+            case R.id.settings:
+                openSettings();
                 break;
             default:
                 break;
@@ -84,13 +94,49 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
     public void generateTip(View view) {
         // just the tippy
 
-        TextView tippyText = (TextView) findViewById(R.id.tippyValue);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        // validation part
 
         EditText editCost = (EditText) findViewById(R.id.editCost);
         EditText editPercent = (EditText) findViewById(R.id.editPers);
-        Tip tip = new Tip(Double.parseDouble(editCost.getText().toString()),
-                Double.parseDouble(editPercent.getText().toString()),
+        double cost = 0.0;
+        boolean returnFlag = false;
+        double percentage = 0.0;
+        try {
+            percentage = Double.parseDouble(editPercent.getText().toString());
+            if (percentage <= 0.0) {
+                throw new NumberFormatException("Percentage is zero");
+            }
+            editPercent.setHint(getResources().getString(R.string.percent_placeholder));
+        } catch (Exception e) {
+            System.err.println("Invalid percent");
+            editPercent.setText(null);
+            editPercent.setHint(getResources().getString(R.string.bill_err));
+            editPercent.requestFocus();
+            returnFlag = true;
+        }
+        try {
+            cost = Double.parseDouble(editCost.getText().toString());
+            if (cost <= 0.0) {
+                throw new NumberFormatException("Cost is zero");
+            }
+            editCost.setHint(getResources().getString(R.string.bill_placeholder));
+        } catch (Exception e) {
+            System.err.println("Invalid cost");
+            editCost.setText(null);
+            editCost.setHint(getResources().getString(R.string.percent_err));
+            editCost.requestFocus();
+            returnFlag = true;
+        }
+
+        if (returnFlag) {
+            return;
+        }
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(spinner.getWindowToken(), 0);
+        Tip tip = new Tip(cost,
+                percentage,
                 Integer.parseInt(spinner.getSelectedItem().toString()),
                 this.currencySign);
         FragmentManager fragmentManager = getFragmentManager();
@@ -101,6 +147,7 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
 
         fragmentTransaction.replace(R.id.tip_list, tipCard, "TIP");
         fragmentTransaction.commit();
+        findViewById(R.id.gridLayout).requestFocus();
     }
 
 

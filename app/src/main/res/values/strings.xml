@@ -7,6 +7,8 @@
     <string name="tip_help">Trouble choosing?</string>
     <string name="bill_placeholder">9.99</string>
     <string name="percent_placeholder">10</string>
+    <string name="bill_err">Please enter bill</string>
+    <string name="percent_err">Please enter %</string>
     <string name="sign_percent">%</string>
     <string name="sign_dollar">$</string>
     <string name="change_currency">Change Currency</string>
