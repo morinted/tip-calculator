@@ -1,14 +1,18 @@
 package in.tedmor.www.tippy;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,7 +20,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements TipCard.OnFragmentInteractionListener {
     String currencySign;
     int defaultPercentage;
 
@@ -86,9 +90,15 @@ public class HomeActivity extends Activity {
         Tip tip = new Tip(Double.parseDouble(editCost.getText().toString()),
                 Double.parseDouble(editPercent.getText().toString()),
                 Integer.parseInt(spinner.getSelectedItem().toString()));
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TipCard tipCard = new TipCard();
+        fragmentTransaction.add(R.id.tip_list, tipCard, "TIP");
+        fragmentTransaction.commit();
+    }
 
-        String tipAmt = currencySign + tip.getTipToString();
-
-        tippyText.setText(tipAmt);
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        System.out.println(uri);
     }
 }
