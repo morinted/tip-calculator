@@ -13,16 +13,19 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 
 public class HomeActivity extends Activity implements TipCard.OnFragmentInteractionListener {
     String currencySign;
     int defaultPercentage;
+    ArrayList<TipCard> tipCards = new ArrayList<TipCard>();
 
     public void loadSettings() {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -89,11 +92,15 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         EditText editPercent = (EditText) findViewById(R.id.editPers);
         Tip tip = new Tip(Double.parseDouble(editCost.getText().toString()),
                 Double.parseDouble(editPercent.getText().toString()),
-                Integer.parseInt(spinner.getSelectedItem().toString()));
+                Integer.parseInt(spinner.getSelectedItem().toString()),
+                this.currencySign);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TipCard tipCard = new TipCard();
-        fragmentTransaction.add(R.id.tip_list, tipCard, "TIP");
+        TipCard tipCard = TipCard.newInstance(tip);
+        tipCards.add(tipCard);
+        LinearLayout ll = (LinearLayout) findViewById(R.id.tip_list);
+
+        fragmentTransaction.replace(R.id.tip_list, tipCard, "TIP");
         fragmentTransaction.commit();
     }
 

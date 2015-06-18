@@ -7,6 +7,9 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 
 /**
@@ -56,7 +59,47 @@ public class TipCard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tip_card, container, false);
+        View result = inflater.inflate(R.layout.fragment_tip_card, container, false);
+        setValues(result);
+        return result;
+    }
+
+    public void setValues(View view) {
+        // Set percentage
+        TextView pers = (TextView) view.findViewById(R.id.displayPercentage);
+        pers.setText(tip.getPercentageToString());
+        RatingBar rb = (RatingBar) view.findViewById(R.id.displayStars);
+        rb.setRating(tip.getRating());
+        TextView cost = (TextView) view.findViewById(R.id.displayCost);
+        cost.setText(tip.getCostToString());
+        TextView tipDisplay = (TextView) view.findViewById(R.id.displayTip);
+        tipDisplay.setText(tip.getTipToString());
+        TextView total = (TextView) view.findViewById(R.id.displayTotal);
+        total.setText(tip.getTotalToString());
+
+        if (tip.getPeople() == 1) {
+            View txtGroup = view.findViewById(R.id.textNumPeople);
+            GridLayout me = (GridLayout) txtGroup.getParent();
+            me.removeView(txtGroup);
+            txtGroup = view.findViewById(R.id.textTipPP);
+            me.removeView(txtGroup);
+            txtGroup = view.findViewById(R.id.textTotalPP);
+            me.removeView(txtGroup);
+            txtGroup = view.findViewById(R.id.displayTipPerPerson);
+            me.removeView(txtGroup);
+            txtGroup = view.findViewById(R.id.displayTotalPerPerson);
+            me.removeView(txtGroup);
+        } else {
+            TextView txtNumPeople = (TextView) view.findViewById(R.id.textNumPeople);
+            String fmt = getResources().getString(R.string.tipcardnumpeople);
+            String people = String.format(fmt, tip.getPeople());
+            txtNumPeople.setText(people);
+
+            TextView tipPerPerson = (TextView) view.findViewById(R.id.displayTipPerPerson);
+            tipPerPerson.setText(tip.getTipPerPersonToString());
+            TextView ttlPerPerson = (TextView) view.findViewById(R.id.displayTotalPerPerson);
+            ttlPerPerson.setText(tip.getTotalPerPersonToString());
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

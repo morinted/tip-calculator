@@ -17,7 +17,7 @@
     <string name="tipcardcost">Bill:</string>
     <string name="tipcardtip">Tip:</string>
     <string name="tipcardtotal">Total:</string>
-    <string name="tipcardnumpeople">With $d people</string>
+    <string name="tipcardnumpeople">With %1$d people</string>
     <string name="tipcardtipperperson">Tip per person:</string>
     <string name="tipcardtotalperperson">Total per person:</string>
     <string name="total_amt">Total:</string>

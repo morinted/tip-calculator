@@ -12,9 +12,8 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/activity_horizontal_margin"
         android:columnCount="4"
-        android:useDefaultMargins="true">
+        android:useDefaultMargins="false">
 
         <TextView
             android:layout_width="wrap_content"

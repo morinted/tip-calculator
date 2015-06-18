@@ -6,18 +6,21 @@ import java.text.DecimalFormat;
  * Created by Ted on 2015-06-17.
  */
 public class Tip {
-    static final DecimalFormat CURRENCY = new DecimalFormat("0.00##");
+    static final DecimalFormat CURRENCY = new DecimalFormat("0.00");
+    static final DecimalFormat PERCENT = new DecimalFormat("#.##");
     static final int[] RATINGS = {12, 14, 16, 18, 20};
     double cost, percentage, tip, total;
     int rating, people;
+    String sign;
     public Tip() {}
-    public Tip(double cost, double percentage, int people) {
+    public Tip(double cost, double percentage, int people, String sign) {
         this.cost = cost;
         this.percentage = percentage;
         this.tip = (percentage / 100) * cost;
         this.total = this.tip + this.cost;
         this.people = people;
         this.rating = getRatingFromPercentage(this.percentage);
+        this.sign = sign;
     }
 
     public int getRatingFromPercentage(double percentage) {
@@ -36,19 +39,19 @@ public class Tip {
     }
 
     public String getTipPerPersonToString() {
-        return CURRENCY.format(this.tip / (double) people);
+        return sign + CURRENCY.format(this.tip / people);
     }
 
     public String getTotalPerPersonToString() {
-        return CURRENCY.format(this.total / (double) people);
+        return sign + CURRENCY.format((this.total / people));
     }
 
     public String getTipToString() {
-        return CURRENCY.format(this.tip);
+        return sign + CURRENCY.format(this.tip);
     }
 
     public String getCostToString() {
-        return CURRENCY.format(this.cost);
+        return sign + CURRENCY.format(this.cost);
     }
 
     public double getPercentage() {
@@ -56,11 +59,15 @@ public class Tip {
     }
 
     public String getPercentageToString() {
-        return "%" + this.percentage;
+
+        return PERCENT.format(this.percentage) + "%";
+    }
+    public double getTotal() {
+        return this.total;
     }
 
-    public String getTotal() {
-        return CURRENCY.format(this.total);
+    public String getTotalToString() {
+        return sign + CURRENCY.format(this.total);
     }
 
     /*
@@ -71,7 +78,7 @@ public class Tip {
         return RATINGS[rating - 1];
     }
 
-    public int getPercentageFromRating() {
-        return getPercentageFromRating(this.rating);
+    public int getRating() {
+        return this.rating;
     }
 }
