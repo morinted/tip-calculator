@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -100,6 +102,21 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         fragmentTransaction.replace(R.id.tip_list, tipCard, "TIP");
         fragmentTransaction.commit();
     }
+
+
+    public void generateSuggestedTip(float rating) {
+        System.out.println("from home activity, the rating given is: " + rating);
+
+        EditText percentField = (EditText) findViewById(R.id.editPers);
+        Integer percentValue = (int)rating * 2 + 10;
+        percentField.setText(percentValue.toString());
+
+        Button tippyButton = (Button) findViewById(R.id.btnGenerate);
+
+        System.out.println("Tippy! is performing a click");
+        tippyButton.performClick();
+    }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {

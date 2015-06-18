@@ -21,6 +21,11 @@
     <string name="tipcardtipperperson">Tip per person:</string>
     <string name="tipcardtotalperperson">Total per person:</string>
     <string name="total_amt">Total:</string>
+    <string name="tip_rating_1">Poor Service</string>
+    <string name="tip_rating_2">Below Average Service</string>
+    <string name="tip_rating_3">Good Service</string>
+    <string name="tip_rating_4">Excellent Service</string>
+    <string name="tip_rating_5">Over the \'Tippy\' Top</string>
     <string-array name="number_of_people">
         <item>1</item>
         <item>2</item>
