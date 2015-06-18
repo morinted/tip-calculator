@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:id="@+id/popup_root">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="20dp"
+        android:clickable="true"
+        android:background="@drawable/popover_background"
+        >
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="445dp"
+            android:text="@string/suggest_tip_popover_text"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal|top"
+            android:textColor="@color/tippy_purple"
+            android:background="@color/cardview_light_background"
+            android:textSize="@dimen/popover_text_size" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:layout_gravity="center"
+            android:background="@color/cardview_light_background"
+            android:progressTint="@color/tippy_purple"
+            android:progressBackgroundTint="@color/tippy_purple"
+            android:clickable="true"
+            android:rating="3.0"
+            android:id="@+id/" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/suggest_tip_confirm"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textColor="#ffffffff"
+            android:background="@color/tippy_purple" />
+
+    </FrameLayout>
+
+</FrameLayout>

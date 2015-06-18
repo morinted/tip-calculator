@@ -12,15 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
-
 
 public class HomeActivity extends Activity implements TipCard.OnFragmentInteractionListener {
     String currencySign;
@@ -47,6 +43,7 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +66,7 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        switch(id) {
+        switch (id) {
             case R.id.currencyChange:
                 break;
             default:
@@ -79,7 +76,7 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
     }
 
     public void getTipRating(View view) {
-        System.out.println("Tip me");
+        Popover.newInstance().show(getFragmentManager(), null);
     }
 
     public void generateTip(View view) {
@@ -108,4 +105,5 @@ public class HomeActivity extends Activity implements TipCard.OnFragmentInteract
     public void onFragmentInteraction(Uri uri) {
         System.out.println(uri);
     }
+
 }

@@ -34,6 +34,9 @@
         <item>10</item>
     </string-array>
 
+    <string name="title_activity_popup">PopupActivity</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="suggest_tip_confirm">Suggest a \'Tippy\'!</string>
+    <string name="suggest_tip_popover_text">Please rate your experience, so that Tippy! can suggest a tip</string>
 </resources>
